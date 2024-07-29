@@ -38,20 +38,28 @@ Building web applications that can manage rising loads and changing user expecta
 Understanding RabbitMQ
 Messaging is crucial in the world of distributed systems and scalable applications for allowing communication between diverse parts and services. Open-source message broker RabbitMQ has become a potent tool in this field. 
 
-### Key Concepts in RabbitMQ
+## Key Concepts in RabbitMQ
 
 To understand RabbitMQ fully, it’s essential to grasp several key concepts:
 
-Message: Messages are units of data that are sent from a producer (sender) to a consumer (receiver) via RabbitMQ. They contain information that components need to communicate.
-Producer: A producer is a component that sends messages to RabbitMQ. Producers generate messages and dispatch them to the message broker.
-Consumer: A consumer is a component that receives and processes messages from RabbitMQ. Consumers subscribe to queues and wait for messages to arrive.
-Queue: A queue is a data structure in RabbitMQ where messages are stored. Queues act as buffers between producers and consumers. Messages are placed in a queue by producers and retrieved by consumers.
-Exchange: An exchange is an entity in RabbitMQ that determines how messages are routed to queues. Exchanges receive messages from producers and route them to the appropriate queue(s) based on predefined rules.
-Binding: A binding is a rule that connects an exchange to a queue. It specifies which queue(s) will receive messages from a particular exchange.
-Routing Key: In some messaging patterns, messages are routed to queues based on a routing key. The routing key is a property of the message that is used by exchanges to determine the destination queue(s).
-Publisher-Subscriber Pattern: RabbitMQ supports the publisher-subscriber pattern, where multiple consumers can subscribe to the same queue and receive copies of the messages. This is useful for implementing broadcasting and fan-out scenarios.
-RabbitMQ is a versatile and trustworthy message broker that streamlines communication between distributed systems. By offering asynchronous, decoupled messaging, RabbitMQ aids programmers in creating scalable, responsive, and fault-tolerant applications. We’ll go over setting up RabbitMQ and exploiting its capabilities to create scalable ASP.NET Core apps in the sections that follow.
+### Message: Messages are units of data that are sent from a producer (sender) to a consumer (receiver) via RabbitMQ. They contain information that components need to communicate.
+### Producer: A producer is a component that sends messages to RabbitMQ. Producers generate messages and dispatch them to the message broker.
+### Consumer: A consumer is a component that receives and processes messages from RabbitMQ. Consumers subscribe to queues and wait for messages to arrive.
+### Queue: A queue is a data structure in RabbitMQ where messages are stored. Queues act as buffers between producers and consumers. Messages are placed in a queue by producers and retrieved by consumers.
+### Exchange: An exchange is an entity in RabbitMQ that determines how messages are routed to queues. Exchanges receive messages from producers and route them to the appropriate queue(s) based on predefined rules.
+### Binding: A binding is a rule that connects an exchange to a queue. It specifies which queue(s) will receive messages from a particular exchange.
+### Routing Key: In some messaging patterns, messages are routed to queues based on a routing key. The routing key is a property of the message that is used by exchanges to determine the destination queue(s).
+### Publisher-Subscriber Pattern: RabbitMQ supports the publisher-subscriber pattern, where multiple consumers can subscribe to the same queue and receive copies of the messages. This is useful for implementing broadcasting and fan-out scenarios.
+### DeadLetterQue:
+Messages from a queue can be "dead-lettered", which means these messages are republished to an exchange when any of the following four events occur.
 
+The message is negatively acknowledged by a consumer using basic.reject or basic.nack with requeue parameter set to false, or
+The message expires due to per-message TTL, or
+The message is dropped because its queue exceeded a length limit, or
+The message is returned more times to a quorum queue than the delivery-limit.
+RabbitMQ is a versatile and trustworthy message broker that streamlines communication between distributed systems. By offering asynchronous, decoupled messaging, RabbitMQ aids programmers in creating scalable, responsive, and fault-tolerant applications. We’ll go over setting up RabbitMQ and exploiting its capabilities to create scalable ASP.NET Core apps in the sections that follow.
+### LazyQue: 
+A "lazy queue" is a classic queue which is running in lazy mode. When the "lazy" queue mode is set, messages in classic queues are moved to disk as early as practically possible. These messages are loaded into RAM only when they are requested by consumers.
 
 
 
